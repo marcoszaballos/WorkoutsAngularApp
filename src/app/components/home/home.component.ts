@@ -7,14 +7,25 @@ import { ApiService } from '../../services/api.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  
+
+  activeIndex: number = -1;
+  activeIndexEjercicio: number = -1;
   listGruposMusculares: any;
   listEjerciciosGrupoMuscular: any;
+  ejercicioSeleccionado: boolean = false;
 
   constructor(private apiSerice: ApiService){  }
 
   ngOnInit(): void {
     this.getGruposMusculares();
+  }
+
+  setActive(index: number): void {
+    this.activeIndex = index;
+  }
+  setActiveEjercicio(index: number): void {
+    this.activeIndexEjercicio = index;
+    this.ejercicioSeleccionado = true;
   }
 
   getGruposMusculares(){
