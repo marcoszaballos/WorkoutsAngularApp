@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-home',
@@ -19,10 +20,11 @@ export class HomeComponent {
   ocultarEjercicios: boolean = true;  //Oculta el div
 
 
-  constructor(private apiSerice: ApiService){  }
+  constructor(private apiSerice: ApiService, private loginService: LoginService){  }
 
   ngOnInit(): void {
     this.getGruposMusculares();
+    console.log("Login Token: "+this.loginService.getToken());
   }
 
   setActive(index: number): void {
