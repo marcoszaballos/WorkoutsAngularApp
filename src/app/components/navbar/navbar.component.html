@@ -1,0 +1,14 @@
+<div *ngIf="isLoggedIn">
+  <br/>
+  <a href="#" (click)="logout()">Logout</a>
+  <br/>
+  <p>Welcome, {{ email }}</p>
+</div>
+
+<div *ngIf="!isLoggedIn">
+  <br/>
+  <a href="/login">Login</a>
+  <br/>
+  <a href="/signup">Sign Up</a>
+</div>
+  

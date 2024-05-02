@@ -11,25 +11,35 @@ import { SignupComponent } from './components/signup/signup.component';
 import { DataService } from './services/data.service';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from './components/login/login.service';
+import { SignUpService } from './components/signup/signup.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environment'; 
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule ,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
   ],
   providers: [
     provideClientHydration(),
     DataService,
-    LoginService
+    LoginService,
+    SignUpService
   ],
   bootstrap: [AppComponent]
 })

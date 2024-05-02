@@ -8,7 +8,7 @@ import { LoginService } from './login.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-  username!: string;
+  email!: string;
   password!: string;
 
   constructor(private loginService:LoginService){ }
@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: NgForm){
-    const username = form.value.username
+    const email = form.value.email
     const pass = form.value.password
 
-    this.loginService.login(username, pass);
+    this.loginService.login(email, pass);
   }
 
 }

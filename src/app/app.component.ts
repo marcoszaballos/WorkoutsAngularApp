@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import firebase from 'firebase/compat/app';
+import { environment } from '../environment'; 
 
 @Component({
   selector: 'app-root',
@@ -14,10 +15,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void{
-    firebase.initializeApp({
-      apiKey: "AIzaSyDqNKLnqUxuXNE156e5tB6KNPghSN5KMH8",
-      authDomain: "app-workouts.firebaseapp.com",
-    });
+    firebase.initializeApp(environment.firebaseConfig);
   }
 
   public open(modal: any): void {
