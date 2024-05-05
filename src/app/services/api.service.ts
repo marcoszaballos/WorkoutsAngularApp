@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constants } from '../constants';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,15 @@ export class ApiService {
 
   public getListEjerciciosPorGrupoMuscular(grupoMuscular: string){
     return this.http.get(Constants.BASE_URL+Constants.GET_EJERCICIOS_GRUPO_MUSCULAR+grupoMuscular);
+  }
+
+  //Insertar los registros en base de datos
+  public insertEjercicios(listaEjercicios: any[], userEmail: string): Observable<any> {
+    const listaEjerciciosAndEmail = {
+      ejercicios: listaEjercicios,
+      email: userEmail
+    };
+    
+    return this.http.post<any>(Constants.BASE_URL+Constants.INSERT_EJERCICIOS_USUARIO, listaEjerciciosAndEmail);
   }
 }

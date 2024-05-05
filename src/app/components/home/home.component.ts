@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { LoginService } from '../login/login.service';
+import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -19,8 +20,7 @@ export class HomeComponent {
   ejercicioSeleccionado: boolean = false;
   ocultarEjercicios: boolean = true;  //Oculta el div
 
-
-  constructor(private apiSerice: ApiService, private loginService: LoginService){  }
+  constructor(private apiService: ApiService, private loginService: LoginService, private authService: AuthService){  }
 
   ngOnInit(): void {
     this.getGruposMusculares();
@@ -39,7 +39,7 @@ export class HomeComponent {
   }
 
   getGruposMusculares(){
-    this.apiSerice
+    this.apiService
     .getListGruposMusculares()
     .subscribe(resp => {
       this.listGruposMusculares = resp;
@@ -49,7 +49,7 @@ export class HomeComponent {
   }
 
   getEjerciciosGrupoMuscular(grupoMuscular: string){
-    this.apiSerice
+    this.apiService
     .getListEjerciciosPorGrupoMuscular(grupoMuscular)
     .subscribe(resp => {
       this.listEjerciciosGrupoMuscular = resp;
@@ -75,4 +75,31 @@ export class HomeComponent {
     this.listEjerciciosAgregados = new Array();
     this.ocultarEjercicios = true;
   }
+
+  insertEjercicios(): void {
+    let userEmail: string | null = null;
+  
+    // Obtener el correo electrónico de manera síncrona
+    this.authService.getUserEmail().then(email => {
+      userEmail = email;
+      
+      if (userEmail) {
+        this.apiService.insertEjercicios(this.listEjerciciosAgregados, userEmail).subscribe(
+          response => {
+            // Manejar la respuesta del servidor si es necesario
+            console.log('Petición insert ejecutada, respuesta: ', response);
+            // TODO: Mostrar mensaje por pantalla
+          },
+          error => {
+            console.error('Error al añadir ejercicios: ', error);
+            // TODO: Mostrar mensaje por pantalla
+          }
+        );
+      } else {
+        console.error('No se pudo obtener el correo electrónico del usuario.');
+        // TODO: Mostrar mensaje por pantalla
+      }
+    });
+  }
+  
 } 

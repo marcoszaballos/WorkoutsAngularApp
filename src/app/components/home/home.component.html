@@ -43,5 +43,6 @@
 </div>
 <div *ngIf="ejercicioSeleccionado || listEjerciciosAgregados.length>0" class="d-flex flex-column flex-md-row p-3 gap-4 py-mb-5 align-items-center justify-content-center">
     <button type="button" class="btn btn-primary"  [ngClass]="{ 'disabled': !ejercicioSeleccionado}" (click)="addEjercicio()">Añadir ejercicio</button>
+    <button type="button" class="btn btn-secondary" (click)="insertEjercicios()">Guardar entreno</button>
     <button type="button" class="btn btn-secondary" (click)="vaciarLista()">Vaciar lista</button>
 </div>
