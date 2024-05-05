@@ -15,7 +15,8 @@ import { SignUpService } from './components/signup/signup.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { environment } from '../environment'; 
+import { environment } from '../environment';
+import { HistoricoEntrenosComponent } from './components/historico-entrenos/historico-entrenos.component'; 
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { environment } from '../environment';
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    NavbarComponent
+    NavbarComponent,
+    HistoricoEntrenosComponent
   ],
   imports: [
     BrowserModule,

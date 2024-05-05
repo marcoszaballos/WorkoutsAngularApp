@@ -7,21 +7,21 @@
           <a class="nav-link" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="/historico-entrenos">Histórico entrenos</a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" *ngIf="!isLoggedIn">
-          <a class="nav-link" href="/login">Login</a>
+          <a class="btn btn-outline-primary me-2" href="/login">Login</a>
         </li>
         <li class="nav-item" *ngIf="!isLoggedIn">
-          <a class="nav-link" href="/signup">Sign Up</a>
+          <a class="btn btn-primary" href="/signup">Sign Up</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">
           <span class="nav-link">Welcome, {{ email }}</span>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">
-          <a class="nav-link" href="#" (click)="logout()">Logout</a>
+          <a class="btn btn-outline-primary me-2" href="#" (click)="logout()">Logout</a>
         </li>
       </ul>
     </div>

@@ -1,11 +1,34 @@
 
+
+
   <div id="login">
-      <h3 class="text-center text-white pt-5">Login form</h3>
+      <h3 class="text-center text-white pt-5">Login</h3>
       <div class="container">
           <div id="login-row" class="row justify-content-center align-items-center">
               <div id="login-column" class="col-md-6">
                   <div id="login-box" class="col-md-12">
-                      <form id="loginForm" class="form" action="" method="post" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+                    <form id="loginForm" class="form" action="" method="post" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+                        <!--<img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->                    
+                        <div class="form-floating">
+                          <input type="text" name="email" id="email" class="form-control" [(ngModel)]="email" placeholder="name@example.com">
+                          <label for="floatingInput">Email address</label>
+                        </div>
+                        <br/>
+                        <div class="form-floating">
+                          <input type="password" name="password" id="password" class="form-control" [(ngModel)]="password" placeholder="Password">
+                          <label for="floatingPassword">Password</label>
+                        </div>
+                        <div class="form-check text-start my-3">
+                          <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                          <label class="form-check-label" for="flexCheckDefault">
+                            Remember me
+                          </label>
+                        </div>
+                        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+                    </form>
+
+                      <!-- ANTIGUO FORMULARIO LOGIN
+                        <form id="loginForm" class="form" action="" method="post" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
                           <h3 class="text-center text-info">Login</h3>
                           <div class="form-group">
                               <label for="email" class="text-info">Email:</label><br>
@@ -22,7 +45,7 @@
                           <div id="register-link" class="text-right">
                               <a href="/signup" class="text-info">Register here</a>
                           </div>
-                      </form>
+                      </form>-->
                   </div>
               </div>
           </div>
