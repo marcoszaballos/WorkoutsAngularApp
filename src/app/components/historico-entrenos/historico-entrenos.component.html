@@ -1,1 +1,40 @@
-<p>historico-entrenos works!</p>
+<div class="d-flex flex-column flex-md-row p-3 gap-4 py-md-5 align-items-center justify-content-center">
+
+    <ul class="list-group">
+        <li *ngFor="let registro of listHistoricoEntrenos; let i = index" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" 
+            (click)="openModal(registro?.ULTIMO_ENTRENO, this.userEmail)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 class="mb-0">{{registro.ULTIMO_ENTRENO}}</h6>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+
+    <!-- Button trigger modal 
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="openModal()">
+        Launch demo modal
+    </button>-->
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Entrenamiento {{this.ultimoEntreno}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p *ngFor="let ejercicio of listEjerciciosPorFecha; let i = index">
+                        {{ejercicio.EJERCICIO}}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -20,11 +21,16 @@ export class HomeComponent {
   ejercicioSeleccionado: boolean = false;
   ocultarEjercicios: boolean = true;  //Oculta el div
 
-  constructor(private apiService: ApiService, private loginService: LoginService, private authService: AuthService){  }
+  isLoggedIn: boolean = false;
+
+  constructor(private apiService: ApiService, private loginService: LoginService, private authService: AuthService, private router:Router){
+    this.authService.checkAuthState().subscribe((loggedIn: boolean) => {
+      this.isLoggedIn = loggedIn;
+    });
+  }
 
   ngOnInit(): void {
     this.getGruposMusculares();
-    console.log("Login Token: "+this.loginService.getToken());
   }
 
   setActive(index: number): void {
@@ -77,29 +83,33 @@ export class HomeComponent {
   }
 
   insertEjercicios(): void {
-    let userEmail: string | null = null;
-  
-    // Obtener el correo electrónico de manera síncrona
-    this.authService.getUserEmail().then(email => {
-      userEmail = email;
-      
-      if (userEmail) {
-        this.apiService.insertEjercicios(this.listEjerciciosAgregados, userEmail).subscribe(
-          response => {
-            // Manejar la respuesta del servidor si es necesario
-            console.log('Petición insert ejecutada, respuesta: ', response);
-            // TODO: Mostrar mensaje por pantalla
-          },
-          error => {
-            console.error('Error al añadir ejercicios: ', error);
-            // TODO: Mostrar mensaje por pantalla
-          }
-        );
-      } else {
-        console.error('No se pudo obtener el correo electrónico del usuario.');
-        // TODO: Mostrar mensaje por pantalla
-      }
-    });
+    if(!this.isLoggedIn){ //Redirigimos al login si no está la sesión iniciada
+      this.router.navigate(['/login']); 
+    } else {
+      let userEmail: string | null = null;
+    
+      // Obtener el correo electrónico de manera síncrona
+      this.authService.getUserEmail().then(email => {
+        userEmail = email;
+
+        if (userEmail) {
+          this.apiService.insertEjercicios(this.listEjerciciosAgregados, userEmail).subscribe(
+            response => {
+              // Manejar la respuesta del servidor si es necesario
+              console.log('Petición insert ejecutada, respuesta: ', response);
+              // TODO: Mostrar mensaje por pantalla
+            },
+            error => {
+              console.error('Error al añadir ejercicios: ', error);
+              // TODO: Mostrar mensaje por pantalla
+            }
+          );
+        } else {
+          console.error('No se pudo obtener el correo electrónico del usuario.');
+          // TODO: Mostrar mensaje por pantalla
+        }
+      });
+    }
   }
   
 } 

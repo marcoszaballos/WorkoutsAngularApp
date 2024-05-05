@@ -3,6 +3,8 @@ export const Constants = {
     GET_GRUPOS_MUSCULARES: "/getListaGruposMusculares.php",
     GET_LISTA_EJERCICIOS: "/getListaEjercicios.php",
     GET_EJERCICIOS_GRUPO_MUSCULAR: "/getEjercicioGrupoMuscular.php?grupoMuscular=",
-    INSERT_EJERCICIOS_USUARIO: "/insertEjerciciosUsuario.php"
+    INSERT_EJERCICIOS_USUARIO: "/insertEjerciciosUsuario.php",
+    GET_HISTORICO_EJERCICIOS_GROUP_BY_DATE: "/getHistoricoEjerciciosGroupByDate.php?userEmail=",
+    GET_HISTORICO_EJERCICIOS_FILTER_BY_DATE: "/getHistoricoEjerciciosFilterByDate.php?fecha="
   };
   

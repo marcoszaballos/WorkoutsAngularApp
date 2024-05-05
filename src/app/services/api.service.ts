@@ -25,13 +25,21 @@ export class ApiService {
     return this.http.get(Constants.BASE_URL+Constants.GET_EJERCICIOS_GRUPO_MUSCULAR+grupoMuscular);
   }
 
+  public getHistoricoEjerciciosGroupByDate(userEmail: string){
+    return this.http.get(Constants.BASE_URL+Constants.GET_HISTORICO_EJERCICIOS_GROUP_BY_DATE+userEmail);
+  }
+
+  public getHistoricoEjerciciosFilterByDate(fecha: string, userEmail: string){
+    return this.http.get(Constants.BASE_URL+Constants.GET_HISTORICO_EJERCICIOS_FILTER_BY_DATE+fecha+"&userEmail="+userEmail);
+  }
+
   //Insertar los registros en base de datos
   public insertEjercicios(listaEjercicios: any[], userEmail: string): Observable<any> {
     const listaEjerciciosAndEmail = {
       ejercicios: listaEjercicios,
       email: userEmail
     };
-    
+
     return this.http.post<any>(Constants.BASE_URL+Constants.INSERT_EJERCICIOS_USUARIO, listaEjerciciosAndEmail);
   }
 }
