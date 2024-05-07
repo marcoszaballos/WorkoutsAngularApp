@@ -22,7 +22,7 @@ export class HomeComponent {
   ocultarEjercicios: boolean = true;  //Oculta el div
 
   isLoggedIn: boolean = false;
-
+  
   constructor(private apiService: ApiService, private loginService: LoginService, private authService: AuthService, private router:Router){
     this.authService.checkAuthState().subscribe((loggedIn: boolean) => {
       this.isLoggedIn = loggedIn;

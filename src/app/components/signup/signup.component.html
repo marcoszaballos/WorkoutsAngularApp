@@ -5,6 +5,12 @@
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
                 <div id="login-box" class="col-md-12">
+
+                    <br/>
+                    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+                      {{ errorMessage }}
+                    </div>
+                    
                     <form id="signupForm" class="form" action="" method="post" #signupForm="ngForm" (ngSubmit)="signup(signupForm)">
                         <!--<img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->                    
                         <div class="form-floating">
