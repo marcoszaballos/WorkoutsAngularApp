@@ -45,7 +45,22 @@ export class LoginService{
               reject(errorCode);
             });
         });
-      }
+    }
+      
+    async resetPassword(email: string){
+        return new Promise<string>((resolve, reject) => {
+            firebase.auth().sendPasswordResetEmail(email)
+            .then(() => {
+                resolve("200");
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log("ERROR: Code: " + errorCode + " - Message: " + errorMessage);
+                reject(errorCode);
+            })
+        });
+    }
       
     
     getToken(){

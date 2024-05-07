@@ -7,10 +7,11 @@
                 <div id="login-box" class="col-md-12">
 
                     <br/>
-                    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+                    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
                       {{ errorMessage }}
+                      <button type="button" class="btn-close" aria-label="Close" (click)="errorMessage = ''"></button>
                     </div>
-                    
+
                     <form id="signupForm" class="form" action="" method="post" #signupForm="ngForm" (ngSubmit)="signup(signupForm)">
                         <!--<img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->                    
                         <div class="form-floating">

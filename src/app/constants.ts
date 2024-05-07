@@ -10,6 +10,7 @@ export const Constants = {
     ERROR_INVALID_CREDENTIALS: "auth/invalid-credential",
     ERROR_INVALID_EMAIL: "auth/invalid-email",
     ERROR_WEAK_CREDENTIALS: "auth/weak-password",
-    ERROR_EMAIL_IN_USE: "auth/email-already-in-use"
+    ERROR_EMAIL_IN_USE: "auth/email-already-in-use",
+    ERROR_EMAIL_VACIO: "Debes informar el campo email"
   };
   

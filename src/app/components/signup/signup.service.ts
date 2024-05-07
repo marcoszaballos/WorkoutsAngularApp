@@ -38,7 +38,7 @@ export class SignUpService{
                 });
       
               this.router.navigate(['/']);    // Redireccionar a la página correspondiente después del registro
-              resolve("Success");
+              resolve("200");
             })
             .catch((error) => {
               var errorCode = error.code;
@@ -47,7 +47,6 @@ export class SignUpService{
               reject(errorCode);
             });
         });
-      }
-      
-
+    }
+  
 }

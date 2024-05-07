@@ -1,6 +1,3 @@
-
-
-
   <div id="login">
       <h3 class="text-center text-white pt-5">Login</h3>
       <div class="container">
@@ -9,8 +6,17 @@
                   <div id="login-box" class="col-md-12">
                     
                     <br/>
-                    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+                    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
                       {{ errorMessage }}
+                      <button type="button" class="btn-close" aria-label="Close" (click)="errorMessage = ''"></button>
+                    </div>
+                    <div *ngIf="warningMessage" class="alert alert-warning alert-dismissible fade show" role="info">
+                        {{ warningMessage }}
+                        <button type="button" class="btn-close" aria-label="Close" (click)="warningMessage = ''"></button>
+                    </div>
+                    <div *ngIf="infoMessage" class="alert alert-info alert-dismissible fade show" role="info">
+                        {{ infoMessage }}
+                        <button type="button" class="btn-close" aria-label="Close" (click)="infoMessage = ''"></button>
                     </div>
 
                     <form id="loginForm" class="form" action="" method="post" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
@@ -31,6 +37,10 @@
                           </label>
                         </div>
                         <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+                        
+                        <small>
+                          <a href="#" (click)="resetPassword(email); $event.preventDefault()">He olvidado mi contraseña</a>
+                        </small>
                     </form>
 
                       <!-- ANTIGUO FORMULARIO LOGIN

@@ -13,6 +13,7 @@ export class SignupComponent {
   password!: string;
   
   errorMessage: any;
+  message: any;
 
   constructor(private signupService:SignUpService){ }
 

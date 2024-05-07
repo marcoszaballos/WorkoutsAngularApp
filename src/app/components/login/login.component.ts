@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   password!: string;
   
   errorMessage: any;
+  warningMessage: any;
+  infoMessage: any;
 
   constructor(private loginService:LoginService){ }
 
@@ -28,15 +30,44 @@ export class LoginComponent implements OnInit {
     // Llamar a la función de inicio de sesión y manejar el resultado
     this.loginService.login(email, pass)
       .catch((error) => {
-        if (error === Constants.ERROR_INVALID_CREDENTIALS) {
-          this.errorMessage = "Email o contraseña incorrectos";
-        } else if (error === Constants.ERROR_INVALID_EMAIL) {
-          this.errorMessage = "El formato del email es incorrecto";
-        } else {
-          console.error(error);
-          this.errorMessage = "Error general. Inténtalo de nuevo.";
-        }
+        this.checkAuthError(error);
       });
+  }
+
+  resetPassword(email: string){
+    if(email===undefined){
+      this.errorMessage=Constants.ERROR_EMAIL_VACIO;
+    } else {
+      this.loginService.resetPassword(email)
+      .then((msg)=>{
+        console.log(msg);
+        this.resetMessages();
+        this.infoMessage="Pronto recibirás un correo electrónico para restablecer tu constraseña"
+      })
+      .catch((error)=>{
+        console.log(error);
+        this.checkAuthError(error);
+      })
+    }
+    console.log(email);
+  }
+
+  private checkAuthError(error: string){
+    this.resetMessages();
+    if (error === Constants.ERROR_INVALID_CREDENTIALS) {
+      this.errorMessage = "Email o contraseña incorrectos";
+    } else if (error === Constants.ERROR_INVALID_EMAIL) {
+      this.errorMessage = "El formato del email es incorrecto";
+    } else {
+      console.error(error);
+      this.errorMessage = "Error general. Inténtalo de nuevo.";
+    }
+  }
+
+  private resetMessages(){
+    this.errorMessage=undefined;
+    this.infoMessage=undefined;
+    this.warningMessage=undefined;
   }
   
 }
