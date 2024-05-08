@@ -88,14 +88,38 @@ export class HomeComponent {
     });
   }
 
-  getEjerciciosGrupoMuscular(grupoMuscular: string){
+  async getEjerciciosGrupoMuscular(grupoMuscular: string){
     this.apiService
     .getListEjerciciosPorGrupoMuscular(grupoMuscular)
-    .subscribe(resp => {
+    .subscribe(async resp => {
       this.listEjerciciosGrupoMuscular = resp;
 
-      console.log(this.listEjerciciosGrupoMuscular)
-    })
+      //Obtenemos el email de manera síncrona
+      await this.authService.getUserEmail().then(email => {
+        this.userEmail=email;
+      });
+      if(this.userEmail){
+        this.getFechaUltimoEntrenoEjercicio(grupoMuscular, this.userEmail).then(undefined => {
+          //Objeto que informaremos con todos los grupos musculares y opcionalmente la fecha del último entreno
+          interface Registro {
+            EJERCICIO: string;
+            FECHA: string;
+          }
+
+          const registros: Registro[] = [];
+          for(const ejercicio of this.listEjerciciosGrupoMuscular){
+            let fechaUltimoEntreno: any;
+            for(const ultimoEntreno of this.listUltimoEntrenoEjercicio){
+              if(ejercicio.EJERCICIO === ultimoEntreno.EJERCICIO){
+                fechaUltimoEntreno = ultimoEntreno.ULTIMO_ENTRENO
+              }
+            }
+            registros.push({ EJERCICIO: ejercicio.EJERCICIO, FECHA: fechaUltimoEntreno});
+          }
+          this.listEjerciciosGrupoMuscular=registros;
+        });
+      }
+    });
   }
 
   addEjercicio(){
@@ -143,7 +167,6 @@ export class HomeComponent {
         this.apiService.getFechaUltimoEntrenoGrupoMuscular(userEmail)
           .subscribe(resp => {
             this.listUltimoEntrenoGrupoMuscular = resp;
-            console.log(this.listUltimoEntrenoGrupoMuscular);
             
             resolve(undefined);
           }, error => {
@@ -155,15 +178,19 @@ export class HomeComponent {
     });
   }
 
-  getFechaUltimoEntrenoEjercicio(grupoMuscular: string){
-    if(this.userEmail){ 
-      this.apiService.getFechaUltimoEntrenoEjercicio(grupoMuscular, this.userEmail)
-      .subscribe(resp => {
-        this.listUltimoEntrenoEjercicio = resp;
-  
-        console.log(this.listUltimoEntrenoEjercicio)
-      })
-    }    
+  getFechaUltimoEntrenoEjercicio(grupoMuscular: string, userEmail: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      if(userEmail){ 
+        this.apiService.getFechaUltimoEntrenoEjercicio(grupoMuscular, userEmail)
+        .subscribe(resp => {
+          this.listUltimoEntrenoEjercicio = resp;
+    
+          resolve(undefined);
+        }, error => {
+          reject(error);
+        });
+      }    
+    });
   }
 
 } 

@@ -48,6 +48,6 @@ export class ApiService {
   }
 
   public getFechaUltimoEntrenoEjercicio(grupoMuscular: string, userEmail: string){
-    return this.http.get(Constants.BASE_URL+Constants.GET_FECHA_ULTIMO_ENTRENO_EJERCICIO+Constants.GRUPO_MUSCULAR+grupoMuscular+"&"+Constants.USER_EMAIL+"="+userEmail);
+    return this.http.get(Constants.BASE_URL+Constants.GET_FECHA_ULTIMO_ENTRENO_EJERCICIO+Constants.GRUPO_MUSCULAR+"="+grupoMuscular+"&"+Constants.USER_EMAIL+"="+userEmail);
   } 
 }
