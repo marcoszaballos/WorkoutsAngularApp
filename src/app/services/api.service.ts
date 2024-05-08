@@ -30,7 +30,7 @@ export class ApiService {
   }
 
   public getHistoricoEjerciciosFilterByDate(fecha: string, userEmail: string){
-    return this.http.get(Constants.BASE_URL+Constants.GET_HISTORICO_EJERCICIOS_FILTER_BY_DATE+fecha+"&userEmail="+userEmail);
+    return this.http.get(Constants.BASE_URL+Constants.GET_HISTORICO_EJERCICIOS_FILTER_BY_DATE+fecha+"&"+Constants.USER_EMAIL+"="+userEmail);
   }
 
   //Insertar los registros en base de datos
@@ -42,4 +42,12 @@ export class ApiService {
 
     return this.http.post<any>(Constants.BASE_URL+Constants.INSERT_EJERCICIOS_USUARIO, listaEjerciciosAndEmail);
   }
+
+  public getFechaUltimoEntrenoGrupoMuscular(userEmail: string){
+    return this.http.get(Constants.BASE_URL+Constants.GET_FECHA_ULTIMO_ENTRENO_GRUPO_MUSCULAR+userEmail);
+  }
+
+  public getFechaUltimoEntrenoEjercicio(grupoMuscular: string, userEmail: string){
+    return this.http.get(Constants.BASE_URL+Constants.GET_FECHA_ULTIMO_ENTRENO_EJERCICIO+Constants.GRUPO_MUSCULAR+grupoMuscular+"&"+Constants.USER_EMAIL+"="+userEmail);
+  } 
 }
