@@ -131,8 +131,6 @@ export class HomeComponent {
     this.ejercicioSeleccionado = false;
     this.listEjerciciosGrupoMuscular = null;
     this.ocultarEjercicios = true;
-
-    console.log(this.ocultarEjercicios, this.ejercicioSeleccionado)
   }
 
   vaciarLista(){
