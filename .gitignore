@@ -41,3 +41,8 @@ testem.log
 .DS_Store
 Thumbs.db
 src/environment.ts
+.firebaserc
+firebase.json
+.firebase/hosting.ZGlzdFx3b3Jrb3V0cy1hcHAtYW5ndWxhcg.cache
+.firebase/hosting.ZGlzdFx3b3Jrb3V0cy1hcHAtYW5ndWxhclxicm93c2Vy.cache
+./src/environment.ts
