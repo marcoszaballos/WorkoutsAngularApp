@@ -103,6 +103,7 @@ export class HomeComponent {
           //Objeto que informaremos con todos los grupos musculares y opcionalmente la fecha del último entreno
           interface Registro {
             EJERCICIO: string;
+            MUSCULO: string;
             FECHA: string;
           }
 
@@ -114,7 +115,7 @@ export class HomeComponent {
                 fechaUltimoEntreno = ultimoEntreno.ULTIMO_ENTRENO
               }
             }
-            registros.push({ EJERCICIO: ejercicio.EJERCICIO, FECHA: fechaUltimoEntreno});
+            registros.push({ EJERCICIO: ejercicio.EJERCICIO, MUSCULO: ejercicio.MUSCULO, FECHA: fechaUltimoEntreno});
           }
           this.listEjerciciosGrupoMuscular=registros;
         });
