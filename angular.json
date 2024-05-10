@@ -49,6 +49,10 @@
             }
           },
           "configurations": {
+            "node": {
+              "buildOptimizer": false,
+              "platform": "node"
+            },
             "production": {
               "budgets": [
                 {
