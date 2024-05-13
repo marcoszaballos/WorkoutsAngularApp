@@ -19,7 +19,6 @@ export class HistoricoEntrenosComponent {
     // Obtener el correo electrónico de manera síncrona
     this.authService.getUserEmail().then(email => {
       this.userEmail = email;
-      console.log("email ngOnInit: ",email)
 
       this.getGruposMusculares(this.userEmail);
     });
@@ -33,7 +32,6 @@ export class HistoricoEntrenosComponent {
     .subscribe(resp => {
       this.listEjerciciosPorFecha = resp;
 
-      console.log(this.listEjerciciosPorFecha)
     });
   }
 
@@ -43,7 +41,6 @@ export class HistoricoEntrenosComponent {
     .subscribe(resp => {
       this.listHistoricoEntrenos = resp;
 
-      console.log(this.listHistoricoEntrenos)
     });
   }
 }

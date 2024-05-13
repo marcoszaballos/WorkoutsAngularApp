@@ -146,7 +146,7 @@ export class HomeComponent {
       this.apiService.insertEjercicios(this.listEjerciciosAgregados, this.userEmail).subscribe(
         response => {
           // Manejar la respuesta del servidor si es necesario
-          console.log('Petición insert ejecutada, respuesta: ', response);
+          this.vaciarLista()
           // TODO: Mostrar mensaje por pantalla
         },
         error => {

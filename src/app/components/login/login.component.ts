@@ -40,16 +40,13 @@ export class LoginComponent implements OnInit {
     } else {
       this.loginService.resetPassword(email)
       .then((msg)=>{
-        console.log(msg);
         this.resetMessages();
         this.infoMessage="Pronto recibirás un correo electrónico para restablecer tu constraseña"
       })
       .catch((error)=>{
-        console.log(error);
         this.checkAuthError(error);
       })
     }
-    console.log(email);
   }
 
   private checkAuthError(error: string){
@@ -59,7 +56,6 @@ export class LoginComponent implements OnInit {
     } else if (error === Constants.ERROR_INVALID_EMAIL) {
       this.errorMessage = "El formato del email es incorrecto";
     } else {
-      console.error(error);
       this.errorMessage = "Error general. Inténtalo de nuevo.";
     }
   }

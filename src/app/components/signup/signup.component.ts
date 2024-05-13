@@ -22,7 +22,6 @@ export class SignupComponent {
   }
 
   signup(form: NgForm){
-    console.log("SignupComponent.signup ...");
 
     const email = form.value.email
     const pass = form.value.password
@@ -36,7 +35,6 @@ export class SignupComponent {
       } else if (error === Constants.ERROR_EMAIL_IN_USE) {
         this.errorMessage = "Este email ya está registrado";
       } else {
-        console.error(error);
         this.errorMessage = "Error general. Inténtalo de nuevo.";
       }
     });

@@ -23,16 +23,13 @@ export class LoginService{
               user?.getIdToken().then(
                 token => {
                   this.token = token;
-                  console.log(token);
                 }
               )
       
               firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                 .then(() => {
-                  console.log("Persistencia de sesión del usuario: ", firebase.auth.Auth.Persistence.LOCAL);
                 })
                 .catch((error) => {
-                  console.log("Error de persistencia de sesión del usuario: ", error);
                 });
       
               this.router.navigate(['/']);    // Redireccionar a la página correspondiente después del login
@@ -41,7 +38,6 @@ export class LoginService{
             .catch((error) => {
               var errorCode = error.code;
               var errorMessage = error.message;
-              console.log("ERROR: Code: " + errorCode + " - Message: " + errorMessage);
               reject(errorCode);
             });
         });
@@ -56,7 +52,6 @@ export class LoginService{
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                console.log("ERROR: Code: " + errorCode + " - Message: " + errorMessage);
                 reject(errorCode);
             })
         });
