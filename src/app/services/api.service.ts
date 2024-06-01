@@ -34,10 +34,11 @@ export class ApiService {
   }
 
   //Insertar los registros en base de datos
-  public insertEjercicios(listaEjercicios: any[], userEmail: string): Observable<any> {
+  public insertEjercicios(listaEjercicios: any[], userEmail: string, fecha: Date): Observable<any> {
     const listaEjerciciosAndEmail = {
       ejercicios: listaEjercicios,
-      email: userEmail
+      email: userEmail,
+      fecha: this.formatFecha(fecha)
     };
 
     return this.http.post<any>(Constants.BASE_URL+Constants.INSERT_EJERCICIOS_USUARIO, listaEjerciciosAndEmail);
@@ -50,4 +51,16 @@ export class ApiService {
   public getFechaUltimoEntrenoEjercicio(grupoMuscular: string, userEmail: string){
     return this.http.get(Constants.BASE_URL+Constants.GET_FECHA_ULTIMO_ENTRENO_EJERCICIO+Constants.GRUPO_MUSCULAR+"="+grupoMuscular+"&"+Constants.USER_EMAIL+"="+userEmail);
     }
+
+  formatFecha(fecha: Date): string {
+    const year = fecha.getFullYear();
+    const month = ('0' + (fecha.getMonth() + 1)).slice(-2);
+    const day = ('0' + fecha.getDate()).slice(-2);
+    const hours = ('0' + fecha.getHours()).slice(-2);
+    const minutes = ('0' + fecha.getMinutes()).slice(-2);
+    const seconds = ('0' + fecha.getSeconds()).slice(-2);
+    const milliseconds = ('00' + fecha.getMilliseconds()).slice(-3);
+  
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
+  }
 }

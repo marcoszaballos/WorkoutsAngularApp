@@ -20,13 +20,14 @@ export class HomeComponent {
   listEjerciciosAgregados: any[] = new Array();     //Lista de ejercicios añadidos
   listUltimoEntrenoGrupoMuscular: any; //Listado de grupos musculares y su fecha de último entreno
   listUltimoEntrenoEjercicio: any; //Listado de ejercicios y su fecha de último entreno
+  fechaEntrenamiento: Date = new Date(); //Fecha en la que registraremos el entrenamiento
 
   ejercicioSeleccionado: boolean = false;
   ocultarEjercicios: boolean = true;  //Oculta el div
 
   isLoggedIn: boolean = false;
   userEmail: any;
-  
+
   constructor(private apiService: ApiService, private loginService: LoginService, private authService: AuthService, private router:Router){
     this.authService.checkAuthState().subscribe((loggedIn: boolean) => {
       this.isLoggedIn = loggedIn;
@@ -143,7 +144,7 @@ export class HomeComponent {
     if(!this.isLoggedIn){ //Redirigimos al login si no está la sesión iniciada
       this.router.navigate(['/login']); 
     } else if (this.userEmail) {
-      this.apiService.insertEjercicios(this.listEjerciciosAgregados, this.userEmail).subscribe(
+      this.apiService.insertEjercicios(this.listEjerciciosAgregados, this.userEmail, this.fechaEntrenamiento).subscribe(
         response => {
           // Manejar la respuesta del servidor si es necesario
           this.vaciarLista()

@@ -1,5 +1,5 @@
 export const Constants = {
-    BASE_URL: "http://marcoszaballos.duckdns.org:8183/phpBackend",
+    BASE_URL: "http://mzrflix.duckdns.org:8183/phpBackend",
 
     GRUPO_MUSCULAR: "grupoMuscular",
     USER_EMAIL: "userEmail",
